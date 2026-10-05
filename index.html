@@ -6,7 +6,7 @@
 <title>Insta360 × Villa Sjövik</title>
 <link rel="icon" type="image/png" href="./insta360-favicon.png"/>
 <meta property="og:title" content="Insta360 × Villa Sjövik — Collaboration proposal 2026"/>
-<meta property="og:description" content="Insta360 captures life at home, for 197,000 followers who find everyday inspiration in the home and garden."/>
+<meta property="og:description" content="Insta360 captures life at Villa Sjövik, for 197,000 followers with real buying power."/>
 <meta property="og:image" content="https://villasjovik.github.io/insta360/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
@@ -15,7 +15,7 @@
 <meta property="og:type" content="website"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Insta360 × Villa Sjövik — Collaboration proposal 2026"/>
-<meta name="twitter:description" content="Insta360 captures life at home, for 197,000 followers who find everyday inspiration in the home and garden."/>
+<meta name="twitter:description" content="Insta360 captures life at Villa Sjövik, for 197,000 followers with real buying power."/>
 <meta name="twitter:image" content="https://villasjovik.github.io/insta360/og-image.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -52,7 +52,6 @@
 @property --sp-sway{syntax:'<length>';inherits:false;initial-value:0px}
 @property --sp-entry{syntax:'<length>';inherits:false;initial-value:0px}
 @property --pb-entry{syntax:'<length>';inherits:false;initial-value:0px}
-@property --pb-kick{syntax:'<length>';inherits:false;initial-value:0px}
 @property --pr-damp{syntax:'<number>';inherits:true;initial-value:1}
 /* horizontal-overflow guard — overflow-x:clip clips without creating a scroll container,
    so position:sticky (.profil-head) and fixed chrome keep working; hidden = legacy fallback */
@@ -203,10 +202,6 @@ background-image:radial-gradient(circle,rgba(212,168,75,.05) 1px,transparent 1px
 .h-side{flex:1;display:flex;min-width:0}
 .h-side-l{justify-content:flex-end;padding-right:8px}
 .h-side-r{justify-content:flex-start;padding-left:8px}
-.h-lockup::after{content:'';position:absolute;width:500px;height:130px;left:50%;top:50%;transform:translate(-50%,-50%);
-border-radius:50%;background:radial-gradient(ellipse,rgba(212,168,75,.09),transparent 70%);
-pointer-events:none;animation:haloPulse 4s ease-in-out infinite}
-@keyframes haloPulse{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
 .h-tag-p{display:flex;flex-direction:column;align-items:center;will-change:transform}
 .h-tagline{font-family:'Playfair Display',serif;font-size:clamp(24px,3.8vw,48px);font-weight:400;line-height:1.2;
 max-width:760px;margin-bottom:56px;text-wrap:pretty}
@@ -594,14 +589,14 @@ background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:
  .price-note{max-width:620px;margin:40px auto 0;text-align:center;font-family:'Inter',sans-serif;font-size:12.5px;line-height:1.7;color:var(--muted);letter-spacing:.02em}
 @media(max-width:700px){.price-note{font-size:11.5px;margin-top:32px}}
 
-/* === PKG-COL — wraps green handle (pkg-boost) + price-box as one tilted stack ===
+/* === PKG-COL — keeps the price-box in one tilted stack ===
    Reading-mode physics: cards stay alive (float never stops) but FLATTEN toward the
    reader — on hover (0deg) and on scroll-approach (--pr-damp scrubbed 1→.55). */
 .pkg-col{
   --pb-rot:0deg;--pb-base-y:0px;--pb-float:0px;--pb-hover:0px;--pb-scale:1;
   display:flex;flex-direction:column;align-items:stretch;
   transform-style:preserve-3d;transform-origin:50% 55%;
-  transform:rotateY(var(--pb-rot)) translate3d(0,calc(var(--pb-base-y) + var(--pb-float) + var(--pb-hover) + var(--pb-entry,0px) + var(--pb-kick,0px)),0) scale(var(--pb-scale))!important;
+  transform:rotateY(var(--pb-rot)) translate3d(0,calc(var(--pb-base-y) + var(--pb-float) + var(--pb-hover) + var(--pb-entry,0px)),0) scale(var(--pb-scale))!important;
   animation:pb-float-anim 16s cubic-bezier(.45,.05,.55,.95) infinite;
   will-change:transform;
   transition:opacity .8s var(--ease),--pb-hover .55s var(--ease),--pb-rot .65s var(--ease),--pb-entry .9s var(--ease);
@@ -691,7 +686,7 @@ box-shadow:
 /* no-wrap: .price-unit long label — size frozen at 14px */
 /* ribbon → centered award tab; drops in with back-ease after the card lands */
 .price-ribbon{position:absolute;top:0;left:50%;transform:translateX(-50%);background:var(--gold);color:#1a1410;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;padding:6px 16px;border-radius:0 0 10px 10px;z-index:2;white-space:nowrap;overflow:hidden}
-/* One featured package, with its recommendation tab. */
+/* One featured package, with its tailored brief tab. */
 .price-ribbon::after{content:'';position:absolute;top:0;bottom:0;left:0;width:40%;
   background:linear-gradient(105deg,transparent,rgba(255,255,255,.35),transparent);
   transform:translateX(-120%);animation:ribSweep 7s var(--ease) infinite}
@@ -702,9 +697,9 @@ box-shadow:
 .sec-sublead{max-width:580px;margin:-20px auto 48px;font-size:14px;line-height:1.75;color:var(--muted);text-align:center}
 @media(max-width:700px){.sec-sublead{font-size:13px;margin-bottom:36px}}
 
-.price-total.boost-pulse{animation:boostPulse .9s var(--ease)}
-@keyframes boostPulse{0%{transform:scale(1)}40%{transform:scale(1.04);text-shadow:0 0 24px rgba(212,168,75,.5)}100%{transform:scale(1)}}
-/* price shimmer — one gradient sweep after the boost count-up completes */
+.price-total.price-pulse{animation:pricePulse .9s var(--ease)}
+@keyframes pricePulse{0%{transform:scale(1)}40%{transform:scale(1.04);text-shadow:0 0 24px rgba(212,168,75,.5)}100%{transform:scale(1)}}
+/* price shimmer — one gradient sweep after the entrance count-up completes */
 .price-total.shine{background:linear-gradient(100deg,var(--ink) 40%,var(--gold2) 50%,var(--ink) 60%);
   background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
   animation:priceShine 1s var(--ease) 1}
@@ -729,227 +724,6 @@ box-shadow:
 .body-loaded .price-box.in .pi:nth-child(4){animation-delay:.4s}
 .body-loaded .price-box.in .pi:nth-child(5){animation-delay:.46s}
 
-/* Per-paket Reach Boost — green "handle" container ABOVE the price-card. */
-.pkg-boost{
-  width:100%;
-  display:flex;flex-direction:column;
-  background:rgba(8,68,36,.42);
-  border:1px solid rgba(212,168,75,.18);
-  border-radius:18px;
-  color:var(--ink);font-family:'Inter',sans-serif;
-  text-align:left;
-  position:relative;
-  margin-bottom:18px;
-  z-index:2;
-  transition:background .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
-}
-.pkg-boost:hover{
-  background:rgba(12,90,48,.55);
-  border-color:rgba(212,168,75,.32);
-}
-.pkg-boost[aria-pressed="true"]{
-  background:rgba(12,90,48,.62);
-  border-color:rgba(212,168,75,.42);
-  box-shadow:0 -6px 24px rgba(212,168,75,.14),0 0 32px rgba(212,168,75,.08),inset 0 1px 0 rgba(255,255,255,.06);
-}
-/* power-conduit — the switch visibly feeds the card through the 18px gap below */
-.pkg-boost::after{content:'';position:absolute;left:50%;bottom:-18px;width:2px;height:18px;transform:translateX(-50%);
-  background:linear-gradient(180deg,rgba(212,168,75,.45),rgba(212,168,75,.08));
-  opacity:.35;transition:opacity .4s var(--ease),box-shadow .4s var(--ease)}
-.pkg-boost[aria-pressed="true"]::after{opacity:1;box-shadow:0 0 12px rgba(212,168,75,.5)}
-/* energized card — the package absorbs the boost */
-.pkg-boost[aria-pressed="true"]+.price-box{border-color:rgba(212,168,75,.55);
-  box-shadow:0 60px 140px rgba(0,0,0,.78),0 26px 52px rgba(0,0,0,.55),0 0 110px rgba(212,168,75,.18),inset 0 1px 0 rgba(255,255,255,.1)}
-/* Header row — always visible — switch + tag + title + price. */
-.pkg-boost-head{
-  display:flex;align-items:flex-start;gap:14px;
-  padding:14px 18px;
-  width:100%;
-  background:transparent;border:0;
-  font:inherit;color:inherit;
-  cursor:pointer;text-align:left;
-  border-radius:18px 18px 0 0;
-  position:relative;
-  transition:background .25s var(--ease);
-}
-.pkg-boost-head:hover{background:rgba(255,255,255,.02)}
-.pkg-boost-head:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
-/* auto-demo stagecraft — gold shimmer across the head while the demo runs */
-.pkg-boost.is-demo .pkg-boost-head{overflow:hidden;border-radius:inherit}
-.pkg-boost.is-demo .pkg-boost-head::before{content:'';position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(105deg,transparent 30%,rgba(240,200,120,.12) 50%,transparent 70%);
-  transform:translateX(-100%);animation:demoShimmer 1.2s var(--ease) 2}
-@keyframes demoShimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
-.pkg-boost-switch{
-  width:38px;height:22px;flex-shrink:0;margin-top:2px;
-  background:rgba(242,237,228,.14);border-radius:100px;
-  position:relative;transition:background-color .3s ease,background .3s ease,box-shadow .3s ease;
-}
-.pkg-boost-switch::before{content:'';position:absolute;inset:-3px;border-radius:100px;pointer-events:none}
-.pkg-boost-switch::after{
-  content:'';position:absolute;top:2px;left:2px;
-  width:18px;height:18px;background:#F7F2E7;border-radius:50%;
-  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
-  box-shadow:0 2px 6px rgba(0,0,0,.2),0 0 0 .5px rgba(0,0,0,.04);
-}
-/* on-state: 3-stop gold leaf, never iOS green */
-.pkg-boost[aria-pressed="true"] .pkg-boost-switch{
-  background:linear-gradient(135deg,#b8923f,#D4A84B 60%,#F0C878);
-  box-shadow:0 0 14px rgba(212,168,75,.45)}
-.pkg-boost[aria-pressed="true"] .pkg-boost-switch::after{transform:translateX(16px)}
-/* activation choreography — double-overshoot knob + one ring pulse */
-.pkg-boost.just-on .pkg-boost-switch::after{animation:knobSpring .5s var(--ease) both}
-@keyframes knobSpring{0%{transform:translateX(0)}55%{transform:translateX(19px)}75%{transform:translateX(15px)}100%{transform:translateX(16px)}}
-.pkg-boost.just-on .pkg-boost-switch::before{box-shadow:0 0 0 0 rgba(212,168,75,.55);animation:ringPulse .6s var(--ease) .06s 1 both}
-@keyframes ringPulse{to{box-shadow:0 0 0 14px rgba(212,168,75,0)}}
-/* spark burst — rhymes with the hero 3D sparks */
-.bst-spark{position:absolute;width:4px;height:4px;margin:-2px 0 0 -2px;border-radius:50%;z-index:5;
-  background:var(--gold2);box-shadow:0 0 6px var(--gold);pointer-events:none}
-.pkg-boost-text{display:flex;flex-direction:column;gap:5px;flex:1;min-width:0}
-.pkg-boost-tag{
-  align-self:flex-start;
-  font-family:'Inter',sans-serif;font-size:9px;font-weight:600;
-  letter-spacing:.22em;text-transform:uppercase;
-  padding:3px 9px;margin-bottom:3px;
-  border-radius:100px;
-  background:rgba(212,168,75,.08);
-  border:1px solid rgba(212,168,75,.22);
-  color:rgba(242,237,228,.55);
-  transition:background .35s var(--ease),border-color .35s var(--ease),color .35s var(--ease);
-}
-.pkg-boost-tag em{font-style:normal;color:var(--gold);font-weight:700}
-.pkg-boost:hover .pkg-boost-tag{background:rgba(212,168,75,.16);border-color:rgba(212,168,75,.4)}
-.pkg-boost[aria-pressed="true"] .pkg-boost-tag{background:rgba(212,168,75,.16);border-color:rgba(212,168,75,.45);color:rgba(242,237,228,.85)}
-.pkg-boost[aria-pressed="true"] .pkg-boost-tag em{color:var(--gold2)}
-.pkg-boost-title{
-  font-size:13px;font-weight:600;letter-spacing:.015em;color:var(--ink);
-  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
-  transition:color .35s var(--ease);
-}
-.pkg-boost[aria-pressed="true"] .pkg-boost-title{color:var(--gold)}
-.pkg-boost-price{
-  font-size:11px;font-weight:600;color:var(--gold);
-  letter-spacing:.06em;text-transform:uppercase;
-  display:inline-block;
-  transition:opacity .3s var(--ease);
-}
-.pkg-boost-price.is-zero{opacity:.4}
-.pkg-boost[aria-pressed="false"] .pkg-boost-price{display:none}
-
-/* Collapsible body — desc + per-card slider */
-.pkg-boost-body{
-  display:grid;
-  grid-template-rows:0fr;
-  transition:grid-template-rows .55s cubic-bezier(.45,.05,.55,.95);
-  width:100%;
-}
-.pkg-boost[aria-pressed="true"] .pkg-boost-body{
-  grid-template-rows:1fr;
-}
-.pkg-boost-body-inner{
-  overflow:hidden;
-  min-height:0;
-  padding:0 18px;
-}
-.pkg-boost-desc,.pkg-boost-desc-zero{
-  font-size:var(--t-meta);color:rgba(242,237,228,.68);
-  line-height:1.55;letter-spacing:.005em;
-  margin:0;padding:0 0 14px;
-  opacity:0;transform:translateY(6px);
-  transition:color .35s var(--ease),opacity .45s var(--ease) .18s,transform .45s var(--ease) .18s;
-}
-.pkg-boost[aria-pressed="true"] .pkg-boost-desc,
-.pkg-boost[aria-pressed="true"] .pkg-boost-desc-zero{color:rgba(242,237,228,.78);opacity:1;transform:none}
-.pkg-boost-stat{
-  color:var(--gold);font-weight:600;letter-spacing:.015em;
-  white-space:nowrap;
-}
-.pkg-boost[aria-pressed="true"] .pkg-boost-stat{
-  text-shadow:0 0 18px rgba(212,168,75,.35);
-}
-
-/* Per-card budget slider — inside expanded green box */
-.pkg-slider{
-  padding:14px 0 16px;
-  border-top:1px solid rgba(212,168,75,.14);
-  position:relative;
-  opacity:0;transform:translateY(6px);
-  transition:opacity .45s var(--ease) .3s,transform .45s var(--ease) .3s;
-}
-.pkg-boost[aria-pressed="true"] .pkg-slider{opacity:1;transform:none}
-/* value puff above the thumb while dragging */
-.pk-out{position:absolute;bottom:46px;left:33%;transform:translate(-50%,4px);z-index:3;pointer-events:none;
-  font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.06em;color:#1a1410;
-  background:var(--gold);border-radius:8px;padding:3px 8px;white-space:nowrap;
-  opacity:0;transition:opacity .25s var(--ease),transform .25s var(--ease)}
-.pk-out.show{opacity:1;transform:translate(-50%,0)}
-.pkg-slider-lbl{
-  display:block;
-  font-family:'Inter',sans-serif;font-size:9.5px;font-weight:600;
-  letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(212,168,75,.78);
-  margin-bottom:12px;
-}
-.pkg-range{
-  -webkit-appearance:none;appearance:none;width:100%;height:22px;
-  background:transparent;outline:0;cursor:pointer;margin:0;
-}
-.pkg-range::-webkit-slider-runnable-track{height:4px;border-radius:99px;
-  background:linear-gradient(to right,var(--gold) 0%,var(--gold) var(--pk-fill,33%),rgba(212,168,75,.18) var(--pk-fill,33%),rgba(212,168,75,.18) 100%)}
-.pkg-range::-moz-range-track{height:4px;border-radius:99px;background:rgba(212,168,75,.18)}
-.pkg-range::-moz-range-progress{height:4px;border-radius:99px;background:var(--gold)}
-.pkg-range::-webkit-slider-thumb{
-  -webkit-appearance:none;appearance:none;
-  width:18px;height:18px;border-radius:50%;
-  background:var(--gold);
-  margin-top:-7px;
-  cursor:grab;
-  border:2px solid #1a1410;
-  box-shadow:0 3px 10px rgba(0,0,0,.45),0 0 14px rgba(212,168,75,.45);
-  transition:transform .2s var(--ease),box-shadow .2s var(--ease);
-}
-.pkg-range::-moz-range-thumb{
-  width:18px;height:18px;border-radius:50%;
-  background:var(--gold);cursor:grab;border:2px solid #1a1410;
-  box-shadow:0 3px 10px rgba(0,0,0,.45),0 0 14px rgba(212,168,75,.45);
-}
-.pkg-range:hover::-webkit-slider-thumb{transform:scale(1.12);box-shadow:0 4px 14px rgba(0,0,0,.55),0 0 18px rgba(212,168,75,.6)}
-.pkg-range:active::-webkit-slider-thumb{transform:scale(1.22);cursor:grabbing}
-.pkg-ticks{
-  position:relative;display:block;height:26px;
-  margin-top:8px;padding:0;
-  font-family:'Inter',sans-serif;font-size:10px;font-weight:500;
-  letter-spacing:.06em;color:rgba(242,237,228,.6);
-  font-feature-settings:"tnum";
-}
-/* ticks ligger på thumb-CENTRETS bana: center = (i/3)·(100% − thumbW) + thumbW/2, thumbW=22px (18+2·2 border) */
-.pkg-tick{
-  position:absolute;top:2px;left:calc((100% - 22px)*var(--tp,0) + 11px);
-  display:inline-flex;flex-direction:column;align-items:center;gap:4px;
-  cursor:pointer;white-space:nowrap;
-  transition:color .25s var(--ease),transform .25s var(--ease);
-  transform:translateX(-50%);
-}
-.pkg-tick:nth-child(1){--tp:0}
-.pkg-tick:nth-child(2){--tp:.33333}
-.pkg-tick:nth-child(3){--tp:.66667}
-.pkg-tick:nth-child(4){--tp:1}
-.pkg-tick.is-active{transform:translateX(-50%) translateY(-1px)}
-.pkg-tick::before{
-  content:'';position:absolute;top:-9px;left:50%;transform:translateX(-50%);
-  width:1px;height:5px;background:rgba(212,168,75,.25);
-}
-.pkg-tick.is-active{color:var(--gold);font-weight:700}
-.pkg-tick.is-active::before{background:var(--gold);width:2px;box-shadow:0 0 8px rgba(212,168,75,.6)}
-.pkg-tick:hover{color:rgba(242,237,228,.75)}
-
-@media(max-width:560px){
-  .pkg-boost-head{gap:11px;padding:12px 14px}
-  .pkg-boost-body-inner{padding:0 14px}
-  .pkg-boost-title{font-size:12px}
-  .pkg-boost-desc{font-size:11px}
-}
 @media(max-width:700px){
   .price-grid{grid-template-columns:minmax(0,1fr);perspective:none;max-width:none}
   .pkg-col,.price-grid>.pkg-col:first-child,.price-grid>.pkg-col:last-child{--pb-rot:0deg;--pb-base-y:0px;--pb-scale:1;transform:none!important}
@@ -1211,7 +985,6 @@ position:relative;overflow:hidden;transition:color .35s}
   .body-loaded .sec-lbl.rv{letter-spacing:.26em}
   .body-loaded .price-box .price-ribbon{transform:translate(-50%,0)!important;opacity:1!important}
   .body-loaded .price-box .pi{opacity:1!important}
-  .pkg-boost-desc,.pkg-boost-desc-zero,.pkg-slider{opacity:1!important;transform:none!important}
   .sec-h2 em{background-size:100% 1px!important}
   .body-loaded .sp-c.rv,.body-loaded .pkg-col.rv{--sp-entry:0px;--pb-entry:0px}
   .gd::before{display:none!important}
@@ -1238,7 +1011,6 @@ position:relative;overflow:hidden;transition:color .35s}
   .h-content{width:100%;padding-left:0;padding-right:0}
   .h-lockup{flex-direction:row;flex-wrap:nowrap;gap:0;margin-bottom:36px}
   .h-side,.h-side-l,.h-side-r{flex:1;min-width:0;justify-content:center!important;padding:0!important}
-  .h-lockup::after{display:none}
   .h-side-l,.h-side-r{transform:none!important;transition:opacity .8s ease!important;opacity:0}
   body.slide-in .h-side-l,body.slide-in .h-side-r{opacity:1}
   .h-lockup{transform:scale(1)!important}
@@ -1305,9 +1077,9 @@ position:relative;overflow:hidden;transition:color .35s}
              data-svg="./insta360.svg"
              data-fallback="./insta360.svg"
              data-use-svg-color="true"
-             data-layer-gap="4"
+             data-layer-gap="0.5"
              data-tone="neutral" data-exposure="1.0"
-             data-material="metal" data-color="#000000" data-motion="float-spin"
+             data-material="metal" data-color="#ffffff" data-motion="float-spin"
              data-rotate-speed="0.3"
              data-bevel-depth="14"
              data-sparks="true"
@@ -1336,7 +1108,7 @@ position:relative;overflow:hidden;transition:color .35s}
       </div>
     </div>
     <div class="h-tag-p" data-par="5,4">
-    <h1 class="h-tagline">Insta360 captures life at home, for <em>197,000 followers</em> who find everyday inspiration in the home and garden.</h1>
+    <h1 class="h-tagline">Insta360 captures life at Villa Sjövik, for <em>197,000 followers</em> with real buying power.</h1>
     </div>
     <div class="h-scroll" aria-hidden="true">
       <span>Explore</span>
@@ -1417,7 +1189,7 @@ position:relative;overflow:hidden;transition:color .35s}
         <p class="sp-eyebrow">Alternative idea 03</p>
         <h3>A day in the garden</h3>
         <p class="sp-sub">“A fresh view of everyday life outdoors”</p>
-        <p class="sp-body">As an alternative, one video follows a day in the garden with X6 or Ace Pro 2, depending on Insta360's product priority. Everyday life outdoors gives the camera a familiar purpose. The aim is product discovery, with the same video available for Insta360's own channels and advertising for 30 days.</p>
+        <p class="sp-body">As an alternative, one video follows a day in the garden with X6 or Ace Pro 2, depending on Insta360's product priority. Everyday life outdoors gives the camera a familiar purpose. The aim is product discovery, with the same video available for Insta360's own channels and advertising permanently.</p>
         <div class="sp-foot"><span class="sp-tag">Garden life &middot; Recognition &middot; Owned media</span></div>
       </div>
 
@@ -1464,15 +1236,14 @@ position:relative;overflow:hidden;transition:color .35s}
         <p class="sc-lbl">Followers in total</p>
       </div>
       <div class="sc rv d2">
-        <div class="sc-bg sc-bg-sym" aria-hidden="true">&amp;</div>
-        <span class="sc-num sc-text">Home &amp; garden</span>
-        <p class="sc-sub">Interiors &middot; Home life &middot; Garden</p>
-        <p class="sc-lbl">Niche &amp; audience</p>
+        <div class="sc-bg" aria-hidden="true">77</div>
+        <span class="sc-num"><span class="cu" data-v="77.4" data-decimals="1">77.4</span>%</span>
+        <p class="sc-sub">aged 45 or over</p>
+        <p class="sc-lbl">Instagram audience</p>
       </div>
       <div class="sc rv d3">
         <div class="sc-bg" aria-hidden="true">95</div>
         <span class="sc-num"><span class="cu" data-v="95">95</span>% <span class="sc-suf">women</span></span>
-        <p class="sc-sub">77.4% aged 45 or over</p>
         <p class="sc-lbl">Instagram audience</p>
       </div>
     </div>
@@ -1492,47 +1263,21 @@ position:relative;overflow:hidden;transition:color .35s}
     <div class="price-grid">
 
       <div class="pkg-col featured rv d1" data-pkg-col="video">
-        <div class="pkg-boost" role="group" aria-pressed="false" data-pkg="video">
-          <button type="button" class="pkg-boost-head" aria-pressed="false" aria-controls="pkg-boost-body-video" aria-label="Activate Meta reach for Insta360 × Villa Sjövik">
-            <span class="pkg-boost-switch" aria-hidden="true"></span>
-            <span class="pkg-boost-text">
-              <span class="pkg-boost-tag">Optional &middot; <em>Reach Boost</em></span>
-              <span class="pkg-boost-title">Meta reach budget <span class="pkg-boost-price" data-bt-price="video">+€1,000</span></span>
-            </span>
-          </button>
-          <div class="pkg-boost-body" id="pkg-boost-body-video" aria-hidden="true">
-            <div class="pkg-boost-body-inner">
-              <p class="pkg-boost-desc" data-pkg-desc="video">Over <strong class="pkg-boost-stat" data-bt-stat="video">150,000</strong> extra impressions. Meta retargeting brings viewers back with a clickable link on the video in Instagram and Facebook, directing traffic to insta360.com</p>
-              <p class="pkg-boost-desc-zero" data-pkg-desc-zero="video" hidden>Choose a budget below to see how many extra impressions the package delivers.</p>
-              <div class="pkg-slider">
-                <label class="pkg-slider-lbl" for="pk-range-video">Meta budget per production</label>
-                <input id="pk-range-video" class="pkg-range" type="range" min="0" max="3" step="1" value="2" data-pkg-slider="video" aria-label="Meta budget per production for Insta360 × Villa Sjövik"/>
-                <div class="pkg-ticks" aria-hidden="true">
-                  <span class="pkg-tick" data-pkg-tick="video" data-step="0">€0</span>
-                  <span class="pkg-tick" data-pkg-tick="video" data-step="1">€500</span>
-                  <span class="pkg-tick is-active" data-pkg-tick="video" data-step="2">€1,000</span>
-                  <span class="pkg-tick" data-pkg-tick="video" data-step="3">€2,000</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="price-box featured rv" data-pkg-box="video">
           <i class="pr-bg" data-n="01" aria-hidden="true"></i>
           <i class="pr-sheen" aria-hidden="true"></i>
-          <span class="price-ribbon">Recommended</span>
+          <span class="price-ribbon">TAILORED TO YOUR BRIEF</span>
           <h3 class="price-title">Insta360 × Villa Sjövik</h3>
-          <p class="price-sub">1 video &middot; 30-day usage &middot; 30-day paid ad code</p>
+          <p class="price-sub">1 video &middot; Instagram + Facebook &middot; permanent usage rights</p>
           <div class="price-plate">
           <p class="price-total-lbl">Production fee</p>
-          <p class="price-total" data-base="3500" data-boost="4500">3,500</p>
+          <p class="price-total" data-base="3500">3,500</p>
           <span class="price-unit">EUR</span>
           </div>
           <div class="price-includes">
-            <p class="pi hi"><span>1 video published on Villa Sjövik's Instagram</span></p>
-            <p class="pi hi"><span>The same video also published on Villa Sjövik's Facebook <em class="pi-reach">for 197,000 followers across both channels</em></span></p>
+            <p class="pi hi"><span>1 video published in Villa Sjövik's Instagram and Facebook channels <em class="pi-reach">for 197,000 followers across both channels</em></span></p>
             <p class="pi hi"><span>2 Stories on Instagram and Facebook on the day the video is published, with direct link and CTA</span></p>
-            <p class="pi"><span>30 days of content usage rights for Insta360's own channels, website and advertising, included</span></p>
+            <p class="pi"><span><em class="pi-reach">Permanent usage rights</em> to the video for Insta360's own channels, website and advertising</span></p>
             <p class="pi"><span>30-day paid ad code for Insta360's own advertising, included</span></p>
             <p class="pi"><span>Produced and filmed at home in a real Nordic setting; concept, filming and editing included, with the concept and schedule agreed with Insta360</span></p>
           </div>
@@ -1892,12 +1637,12 @@ document.querySelectorAll('.sc').forEach(el=>scObs.observe(el));
 
 const cuObs=new IntersectionObserver(es=>es.forEach(e=>{
   if(!e.isIntersecting)return;
-  const el=e.target,v=+el.dataset.v,sep=el.dataset.sep==='true';
+  const el=e.target,v=+el.dataset.v,sep=el.dataset.sep==='true',decimals=+el.dataset.decimals||0;
   const dur=1200,t0=performance.now();
   (function tick(now){
     const p=Math.min((now-t0)/dur,1),ease=1-Math.pow(1-p,3);
-    const n=Math.round(ease*v);
-    el.textContent=sep?n.toLocaleString('en-GB'):n;
+    const n=Number((ease*v).toFixed(decimals));
+    el.textContent=sep?n.toLocaleString('en-GB'):n.toFixed(decimals);
     if(p<1)requestAnimationFrame(tick);
     else if(window.gsap&&!PRM){ /* completion pop — the number lands with weight */
       const num=el.closest('.sc-num')||el;
@@ -2051,310 +1796,33 @@ document.querySelectorAll('.gc,.lc,.sp-c').forEach(card=>{
   });
 })();
 
-/* === PER-CARD PKG-BOOST (Meta-räckvidd per paket) === */
+/* Price entrance: count up once while booking reads the fixed production fee. */
 (function(){
-  const VIEWS_PER_EUR=150;
-
-  function fmt(n){return Math.round(n).toLocaleString('en-GB')}
-  function fmtThin(n){return Math.round(n).toLocaleString('en-GB')}
-  const numberFrames=new WeakMap();
-  function animateNumber(el,from,to,duration,formatter){
-    cancelAnimationFrame(numberFrames.get(el));
-    const fmtFn=formatter||fmt;
-    const start=performance.now();
-    function tick(now){
-      const t=Math.min((now-start)/duration,1);
-      const eased=1-Math.pow(1-t,3);
-      el.textContent=fmtFn(from+(to-from)*eased);
-      if(t<1)numberFrames.set(el,requestAnimationFrame(tick));
-      else numberFrames.delete(el);
-    }
-    numberFrames.set(el,requestAnimationFrame(tick));
-  }
-
-  // Step values: €0, €500, €1,000, €2,000 per production.
-  const STEP_VALUES=[0,500,1000,2000];
-  const cardBudget={video:1000};
-
-  function stepFromBudget(b){
-    let idx=STEP_VALUES.indexOf(b);
-    if(idx>=0) return idx;
-    let best=0, bestDiff=Infinity;
-    for(let i=0;i<STEP_VALUES.length;i++){
-      const d=Math.abs(STEP_VALUES[i]-b);
-      if(d<bestDiff){bestDiff=d;best=i;}
-    }
-    return best;
-  }
-  function boostCostForCard(pkg){return cardBudget[pkg];}
-  function viewsForCard(pkg){return cardBudget[pkg]*VIEWS_PER_EUR;}
-
-  function refreshCard(pkg,opts){
-    const col=document.querySelector('[data-pkg-col="'+pkg+'"]');
-    if(!col)return;
-    const box=col.querySelector('[data-pkg-box="'+pkg+'"]');
-    const total=box && box.querySelector('.price-total[data-base][data-boost]');
-    const priceLbl=col.querySelector('[data-bt-price="'+pkg+'"]');
-    const statLbl=col.querySelector('[data-bt-stat="'+pkg+'"]');
-    const btn=col.querySelector('.pkg-boost');
-    const slider=col.querySelector('[data-pkg-slider="'+pkg+'"]');
-    const ticks=col.querySelectorAll('[data-pkg-tick="'+pkg+'"]');
-    if(!total)return;
-
-    cancelAnimationFrame(numberFrames.get(total));
-    numberFrames.delete(total);
-    if(statLbl){cancelAnimationFrame(numberFrames.get(statLbl));numberFrames.delete(statLbl);}
-    const isOn=btn && btn.getAttribute('aria-pressed')==='true';
-    const cost=boostCostForCard(pkg);
-
-    const base=+total.dataset.base;
-    const newBoost=base+cost;
-    total.dataset.boost=newBoost;
-
-    if(priceLbl){
-      if(cost===0){
-        priceLbl.innerHTML='+€0';
-        priceLbl.classList.add('is-zero');
-      }else{
-        priceLbl.innerHTML='+€'+fmtThin(cost);
-        priceLbl.classList.remove('is-zero');
-      }
-    }
-    const desc=col.querySelector('[data-pkg-desc="'+pkg+'"]');
-    const descZero=col.querySelector('[data-pkg-desc-zero="'+pkg+'"]');
-    const views=viewsForCard(pkg);
-    if(views===0){
-      if(desc) desc.hidden=true;
-      if(descZero) descZero.hidden=false;
-    }else{
-      if(desc) desc.hidden=false;
-      if(descZero) descZero.hidden=true;
-      if(statLbl) statLbl.innerHTML=fmtThin(views);
-    }
-
-    if(slider){
-      const step=stepFromBudget(cardBudget[pkg]);
-      if(!(opts&&opts.skipSlider)){slider.value=step;}
-      const pct=(step/3)*100;
-      slider.style.setProperty('--pk-fill',pct+'%');
-      ticks.forEach(t=>{t.classList.toggle('is-active', +t.dataset.step===step);});
-    }
-
-    if(isOn){
-      const currentDisplayed=parseInt(total.textContent.replace(/[^\d]/g,''),10);
-      const target=base+cost;
-      if(currentDisplayed!==target){
-        animateNumber(total,currentDisplayed,target,420);
-        total.classList.remove('boost-pulse');void total.offsetWidth;total.classList.add('boost-pulse');
-      }
-    }else{
-      cancelAnimationFrame(numberFrames.get(total));
-      numberFrames.delete(total);
-      if(total.textContent.replace(/[^\d]/g,'')!==String(base)){total.textContent=fmt(base);}
-    }
-  }
-
-  function setCardBudget(pkg,eur,opts){
-    cardBudget[pkg]=eur;
-    refreshCard(pkg,opts);
-  }
-
-  /* spark burst — 12 gold sparks from the switch; rhymes with the hero 3D sparks */
-  function spawnSparks(wrapper){
-    if(!window.gsap||PRM||!FINE)return;
-    const sw=wrapper.querySelector('.pkg-boost-switch');
-    if(!sw)return;
-    const wr=wrapper.getBoundingClientRect(),sr=sw.getBoundingClientRect();
-    const ox=sr.left-wr.left+sr.width/2, oy=sr.top-wr.top+sr.height/2;
-    for(let i=0;i<12;i++){
-      const s=document.createElement('span');
-      s.className='bst-spark';s.setAttribute('aria-hidden','true');
-      s.style.left=ox+'px';s.style.top=oy+'px';
-      wrapper.appendChild(s);
-      const th=(i/12)*Math.PI*2+Math.random()*.5, d=24+Math.random()*18;
-      gsap.fromTo(s,{x:0,y:0,opacity:1,scale:1},
-        {x:Math.cos(th)*d,y:Math.sin(th)*d,opacity:0,scale:.2,duration:.55,ease:'power2.out',onComplete:()=>s.remove()});
-    }
-  }
-
-  /* entrance — the number is an event: count up from 0 once, strike draws in via CSS on .in */
-  const peObs=new IntersectionObserver(es=>es.forEach(e=>{
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{
     if(!e.isIntersecting)return;
-    const box=e.target;peObs.unobserve(box);
-    if(box.dataset.counted)return;box.dataset.counted='1';
-    if(PRM)return;
-    const total=box.querySelector('.price-total[data-base]');
-    if(!total)return;
-    const wrapper=box.parentElement&&box.parentElement.querySelector('.pkg-boost');
-    if(wrapper&&wrapper.getAttribute('aria-pressed')==='true')return; /* boost got there first */
-    animateNumber(total,0,+total.dataset.base,900);
-    setTimeout(()=>{total.classList.remove('boost-pulse');void total.offsetWidth;total.classList.add('boost-pulse');},920);
-  }),{threshold:.35});
-  document.querySelectorAll('[data-pkg-box]').forEach(b=>peObs.observe(b));
-
-  // Wire toggles — click on .pkg-boost-head toggles the wrapper
-  document.querySelectorAll('.pkg-boost-head').forEach(headBtn=>{
-    const wrapper=headBtn.closest('.pkg-boost');
-    if(!wrapper)return;
-    const pkg=wrapper.dataset.pkg;
-    if(!pkg)return;
-    headBtn.addEventListener('click',()=>{
-      const wasActive=wrapper.getAttribute('aria-pressed')==='true';
-      const next=!wasActive;
-      wrapper.setAttribute('aria-pressed',next?'true':'false');
-      headBtn.setAttribute('aria-pressed',next?'true':'false');
-      const body=wrapper.querySelector('.pkg-boost-body');
-      if(body) body.setAttribute('aria-hidden',next?'false':'true');
-
-      const col=document.querySelector('[data-pkg-col="'+pkg+'"]');
-      const total=col && col.querySelector('.price-total[data-base][data-boost]');
-      const box=col && col.querySelector('[data-pkg-box="'+pkg+'"]');
-      if(box)box.dataset.counted='1'; /* toggle supersedes the entrance count-up */
-      refreshCard(pkg);
-
-      /* activation choreography — ON only; OFF is a plain reversal */
-      if(next&&!PRM){
-        wrapper.classList.add('just-on');
-        setTimeout(()=>wrapper.classList.remove('just-on'),520);
-        spawnSparks(wrapper);
-        /* stat tick-up — "150 000 gånger extra" counts up as the desc lands */
-        const statLbl=col&&col.querySelector('[data-bt-stat="'+pkg+'"]');
-        const views=viewsForCard(pkg);
-        if(statLbl&&views>0)animateNumber(statLbl,0,views,800,fmtThin);
-        /* the card absorbs the boost — quick dip, springy recover on a dedicated kick-var */
-        if(window.gsap&&col){
-          gsap.timeline()
-            .to(col,{'--pb-kick':'3px',duration:.16,ease:'power2.in'})
-            .to(col,{'--pb-kick':'-2px',duration:.4,ease:'back.out(2)'})
-            .to(col,{'--pb-kick':'0px',duration:.3});
-        }
-        /* price shimmer once the count-up has completed */
-        if(total){
-          setTimeout(()=>{
-            total.classList.add('shine');
-            total.addEventListener('animationend',()=>total.classList.remove('shine'),{once:true});
-            setTimeout(()=>total.classList.remove('shine'),1400); /* safety */
-          },760);
-        }
-      }
-    });
-  });
-
-  // Wire per-card sliders — with a value puff above the thumb while dragging
-  const TICK_LABELS=['€0','€500','€1,000','€2,000'];
-  document.querySelectorAll('[data-pkg-slider]').forEach(slider=>{
-    const pkg=slider.dataset.pkgSlider;
-    const holder=slider.closest('.pkg-slider');
-    let puff=null,puffTimer=null;
-    if(holder){
-      puff=document.createElement('output');
-      puff.className='pk-out';puff.setAttribute('aria-hidden','true');
-      holder.appendChild(puff);
+    obs.unobserve(e.target);
+    const total=e.target.querySelector('.price-total[data-base]');
+    if(!total||PRM)return;
+    const base=Number(total.dataset.base),start=performance.now();
+    function tick(now){
+      const t=Math.min((now-start)/900,1);
+      total.textContent=Math.round(base*(1-Math.pow(1-t,3))).toLocaleString('en-GB');
+      if(t<1)requestAnimationFrame(tick);
+      else total.classList.add('price-pulse','shine');
     }
-    slider.addEventListener('input',e=>{
-      const step=+e.target.value;
-      const eur=STEP_VALUES[step]||0;
-      setCardBudget(pkg,eur,{skipSlider:true});
-      if(puff&&!PRM){
-        puff.textContent=TICK_LABELS[step]||'';
-        puff.style.left=(step/3*100)+'%';
-        puff.classList.add('show');
-        clearTimeout(puffTimer);
-        puffTimer=setTimeout(()=>puff.classList.remove('show'),700);
-      }
-    });
-    slider.addEventListener('click',e=>e.stopPropagation());
-    slider.addEventListener('mousedown',e=>e.stopPropagation());
-    slider.addEventListener('touchstart',e=>e.stopPropagation(),{passive:true});
-    slider.addEventListener('keydown',e=>e.stopPropagation());
-  });
-
-  // Wire tick labels — clickable to jump to step
-  document.querySelectorAll('[data-pkg-tick]').forEach(tick=>{
-    tick.addEventListener('click',e=>{
-      e.stopPropagation();
-      const pkg=tick.dataset.pkgTick;
-      const step=+tick.dataset.step;
-      setCardBudget(pkg,STEP_VALUES[step]||0);
-    });
-  });
-
-  // Initial render
-  refreshCard('video');
-})();
-
-/* Reach Boost preview: the single featured package returns to its base fee after 2.8s. */
-(function(){
-  const sec=document.getElementById('sec-pr');
-  const btn=document.querySelector('.pkg-col.featured .pkg-boost-head');
-  if(!sec||!btn)return;
-
-  try{if(sessionStorage.getItem('insta360-boost-autoactivated')==='true')return}catch(e){}
-  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-
-  const DELAY_MS=1800;
-  const SHOW_MS=2800;
-  const VIEW_THRESHOLD=0.45;
-
-  let triggered=false;
-  let timerId=null;
-  let demoStopped=false;
-  const stopDemo=e=>{
-    if(!e.isTrusted)return;
-    demoStopped=true;
-    triggered=true;
-    if(timerId!==null){clearTimeout(timerId);timerId=null;}
-    const wrap=btn.closest('.pkg-boost');
-    if(wrap)wrap.classList.remove('is-demo');
-    try{sessionStorage.setItem('insta360-boost-autoactivated','true')}catch(err){}
-  };
-  btn.addEventListener('click',stopDemo);
-  const demoCol=btn.closest('.pkg-col');
-  demoCol.addEventListener('input',stopDemo);
-  demoCol.querySelectorAll('[data-pkg-tick]').forEach(t=>t.addEventListener('click',stopDemo));
-
-  const obs=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(triggered)return;
-      if(e.isIntersecting){
-        if(timerId===null){
-          timerId=setTimeout(()=>{
-            timerId=null;
-            if(triggered)return;
-            const wrap=btn.closest('.pkg-boost');
-            const alreadyOn=wrap && wrap.getAttribute('aria-pressed')==='true';
-            if(alreadyOn){triggered=true;return;}
-            triggered=true;
-            obs.unobserve(sec);
-            if(wrap)wrap.classList.add('is-demo'); /* marked stagecraft — gold shimmer says "this is a demo" */
-            btn.click();
-            try{sessionStorage.setItem('insta360-boost-autoactivated','true')}catch(e){}
-            setTimeout(()=>{
-              const w2=btn.closest('.pkg-boost');
-              if(!demoStopped && w2 && w2.getAttribute('aria-pressed')==='true'){btn.click();}
-            },SHOW_MS);
-            setTimeout(()=>{if(wrap)wrap.classList.remove('is-demo');},SHOW_MS+1200);
-          },DELAY_MS);
-        }
-      }else{
-        if(timerId!==null){clearTimeout(timerId);timerId=null;}
-      }
-    });
-  },{threshold:VIEW_THRESHOLD});
-
-  obs.observe(sec);
+    requestAnimationFrame(tick);
+  }),{threshold:.35});
+  document.querySelectorAll('[data-pkg-box]').forEach(box=>obs.observe(box));
 })();
 
 /* The booking uses data attributes, independent of price count-up animations. */
 function getInsta360Package(){
   const col=document.querySelector('[data-pkg-col="video"]');
   const price=col.querySelector('.price-total');
-  const boostOn=col.querySelector('.pkg-boost').getAttribute('aria-pressed')==='true';
   const base=Number(price.dataset.base);
-  const total=boostOn?Number(price.dataset.boost):base;
   const money=n=>'€'+n.toLocaleString('en-GB');
   return {name:col.querySelector('.price-title').textContent.trim(),base:money(base),
-    boost:money(total-base),total:money(total)};
+    total:money(base)};
 }
 
 /* BOKNINGSFLOW */
@@ -2514,11 +1982,8 @@ function getInsta360Package(){
     if(!state.selDate||!state.selTime)return;
     const d=state.selDate;
     const pkg=getInsta360Package();
-    summaryEl.innerHTML=`Meeting requested: <b>${EN_DAYS_LONG[d.getDay()]}, ${EN_MONTHS[d.getMonth()]} ${d.getDate()} at ${state.selTime}</b><br>Package: <b>${pkg.name}</b><br>Production fee: ${pkg.base} · Reach Boost: ${pkg.boost}<br>Total: <b>${pkg.total}</b>`;
+    summaryEl.innerHTML=`Meeting requested: <b>${EN_DAYS_LONG[d.getDay()]}, ${EN_MONTHS[d.getMonth()]} ${d.getDate()} at ${state.selTime}</b><br>Package: <b>${pkg.name}</b><br>Production fee: ${pkg.base}<br>Total: <b>${pkg.total}</b>`;
   }
-  document.querySelector('.pkg-boost-head').addEventListener('click',refreshBookingSummary);
-  document.querySelector('[data-pkg-slider="video"]').addEventListener('input',refreshBookingSummary);
-  document.querySelectorAll('[data-pkg-tick="video"]').forEach(t=>t.addEventListener('click',refreshBookingSummary));
   toFormBtn.addEventListener('click',()=>{
     if(!state.selTime)return;
     refreshBookingSummary();
@@ -2560,7 +2025,6 @@ function getInsta360Package(){
     const payload={
       Package:pkg.name,
       ProductionFee:pkg.base,
-      ReachBoost:pkg.boost,
       Total:pkg.total,
       _subject:`New meeting request — ${document.getElementById('bk-name').value.trim()} (Insta360)`,
       _template:'table',
@@ -2599,7 +2063,6 @@ Time: ${state.selTime}
 
 Package: ${payload.Package}
 Production fee: ${payload.ProductionFee}
-Reach Boost: ${payload.ReachBoost}
 Total: ${payload.Total}
 
 Name: ${payload.Name}
